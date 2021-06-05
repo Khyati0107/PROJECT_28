@@ -1,27 +1,28 @@
-class Launcher{
+class Chain{
     constructor(bodyA, pointB){
         var options = {
-            bodyA: bodyA,
-            pointB: pointB,
+            bodyA : bodyA,
+            pointB : pointB,
             stiffness: 0.04,
-            length: 10
+            length: 20,       
         }
-        this.pointB = pointB
-        this.launch = constraint.create(options);
-        World.add(world, this.launch);
-    }
-
-    fly(){
-        this.launch.bodyA = null;
-    }
-
-    display(){
-        if(this.launch.bodyA){
-            var pointA = this.launch.bodyA.position;
-            var pointB = this.pointB;
-            strokeWeight(4);
-            line(pointA.x, pointA.y, pointB.x, pointB.y);
-        }
+        this.pointB = pointB;
+        this.chain = Constraint.create(options);
+        World.add(world, this.chain);
     }
     
+	attach(body){
+		this.chain.bodyA = body;
+	}
+    display(){
+        if(this.chain.bodyA ){
+        var pointA = this.chain.bodyA.position;
+        var pointB = this.pointB;
+        strokeWeight(4);
+        line(pointA.x, pointA.y, pointB.x, pointB.y);
+        }
+    }
+    fly(){
+        this.chain.bodyA = null;
+    }
 }

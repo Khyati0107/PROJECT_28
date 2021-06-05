@@ -1,20 +1,26 @@
-class Boy{
+class Boy {
   constructor(x,y) {
-    var options ={
-      isStatic:true
+    var options = {
+        'friction':1,
+        'density':1.5,
+        'isStatic':true
     }
-
-      
-      this.body = (x,y,50,50,options);
-      this.width = 50;
-      this.height = 50;
-      this.image = loadImage("boy.png");
-      this.image.scale = 
-      World.add(world, this.body);
+    this.body = Bodies.rectangle(x, y, 50, 50, options);
+    this.width = 300;
+    this.height = 400;
+    this.image = loadImage("boy.png");
+    
+    World.add(world, this.body);
   }
-    display(){
-      push();
-      translate(200,100);
-      pop();
-    }
+  display(){
+    var pos =this.body.position;
+    push();
+    translate(pos.x,pos.y);
+    strokeWeight(4);
+    stroke("blue");
+    fill("red");
+    imageMode(CENTER);
+    image(this.image, 0, 0, this.width, this.height);
+    pop();
+  }
 }

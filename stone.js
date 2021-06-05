@@ -1,22 +1,31 @@
-class stone{
-    constructor(x, y, width, height, ) {
-        var options = {
-            'restitution':0.8,
-            'friction':1.0,
-            'density':1.0
-        }
-        this.body = Bodies.rectangle(400, 250, width, height, options);
-        this.width = 50;
-        this.height = 50;
-        this.image = loadImage("stone.png");
-        this.image.scale = 0.1
-        World.add(world, this.body);
-      }
-      display(){
-        push();
+class Stone{
+	constructor(x,y,r)
+	{
+		var options={
+			isStatic:false,
+			friction:1,
+			density:1.2,
+			restitution : 0.5
+			}
+		this.x = x;
+		this.y = y;
+		this.r = r
+		this.image=loadImage("stone.png");
+		this.body=Bodies.circle(this.x, this.y, this.r/2, options)
+		World.add(world, this.body);
 
-        imageMode(CENTER);
-        image(this.image, 0, 0, this.width, this.height);
-        pop();
-      }
+	}
+	display()
+	{
+			var pos=this.body.position;		
+			push()
+			translate(pos.x,pos.y);
+			fill(255,0,255)
+			imageMode(CENTER);
+			ellipseMode(RADIUS)
+			image(this.image, 0, 0, this.r*2, this.r*2)
+			pop()
+			
+	}
+
 }
